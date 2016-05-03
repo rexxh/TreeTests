@@ -47,7 +47,7 @@ REQUIRE(tree.Search(5));
 REQUIRE(tree.Search(1));
 REQUIRE(tree.Search(3));
 REQUIRE(!tree.Search(0));
-REQUIRE(!tree.search(8));
+REQUIRE(!tree.Search(8));
 REQUIRE(!tree.Search(6));
 REQUIRE(!tree.Search(4));
 REQUIRE(!tree.Search(2));

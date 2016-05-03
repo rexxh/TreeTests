@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-SCENARIO("Insert_int", "[add]"){
+SCENARIO("Add_int", "[add]"){
   Tree<int> tree;
   REQUIRE(tree.Insert(7));
   REQUIRE(tree.Insert(3));
@@ -14,7 +14,7 @@ SCENARIO("Insert_int", "[add]"){
   REQUIRE(tree.Search(7));
 }
 
-SCENARIO("Insert_char", "[add_c]"){
+SCENARIO("Add_char", "[add_c]"){
   Tree<char> tree;
   REQUIRE(tree.Insert(5));
   REQUIRE(tree.Insert(4));
@@ -24,7 +24,7 @@ SCENARIO("Insert_char", "[add_c]"){
   REQUIRE(tree.Search(6));
 }
 
-SCENARIO("Insert_double", "[add_d]"){
+SCENARIO("Add_double", "[add_d]"){
   Tree<double> tree;
   REQUIRE(tree.Insert(7.62));
   REQUIRE(tree.Insert(3.14));
@@ -47,14 +47,14 @@ REQUIRE(tree.Search(5));
 REQUIRE(tree.Search(1));
 REQUIRE(tree.Search(3));
 REQUIRE(!tree.Search(0));
-REQUIRE(!tree.Search(8));
+REQUIRE(!tree.search(8));
 REQUIRE(!tree.Search(6));
 REQUIRE(!tree.Search(4));
 REQUIRE(!tree.Search(2));
 }
 
 SCENARIO("Search_char", "[search_c]") {
-Tree<char> tree;
+  Tree<char> tree;
 tree.Insert(7);
 tree.Insert(5);
 tree.Insert(1);
@@ -92,9 +92,9 @@ REQUIRE(!tree.Search(2.34));
 }
 
 SCENARIO("Read_int","[read_i]"){
-Tree<int> tree; ifstream file("read.txt");
-REQUIRE(file>>tree);
-file.close();
+Tree<int> tree; ifstream fin("read.txt");
+fin>>tree;
+fin.close();
 REQUIRE(tree.Search(7));
 REQUIRE(tree.Search(9));
 REQUIRE(tree.Search(5));
@@ -103,9 +103,9 @@ REQUIRE(tree.Search(3));
 }
 
 SCENARIO("Read_double","[read_d]"){
-Tree<double> tree; ifstream file("read_db.txt");
-REQUIRE(file>>tree);
-file.close();
+Tree<double> tree; ifstream fin("read_db.txt");
+fin>>tree;
+fin.close();
 REQUIRE(tree.Search(12.74));
 REQUIRE(tree.Search(15.62));
 REQUIRE(tree.Search(7.62));
@@ -116,29 +116,33 @@ REQUIRE(tree.Search(17.16));
 }
 
 SCENARIO("Print_file_int","[print_file_i]"){
-Tree<int> tree; ofstream file("print.txt", ios::app);
+Tree<int> tree, tree_2; ofstream fout("print.txt", ios::app);
   tree.Insert(7);
   tree.Insert(3);
   tree.Insert(5);
-  REQUIRE(file<<tree);
-}
-
-SCENARIO("Print_file_char","[print_file_c]"){
-Tree<char> tree; ofstream file("print_chr.txt", ios::app);
-  tree.Insert(7);
-  tree.Insert(3);
-  tree.Insert(5);
-  REQUIRE(file<<tree);
-
+  fout<<tree; fout<<-1;
+  fout.close();
+  ifstream fin("print.txt");
+  fin>>tree_2;
+  fin.close();
+  REQUIRE(tree_2.Search(7));
+  REQUIRE(tree_2.Search(3));
+  REQUIRE(tree_2.Search(5));
 }
 
 SCENARIO("Print_file_double","[print_file_d]"){
-Tree<double> tree; ofstream file("print_db.txt", ios::app);
+Tree<double> tree, tree_2; ofstream fout("print_db.txt", ios::app);
   tree.Insert(7.77);
   tree.Insert(3.33);
   tree.Insert(5.55);
-  REQUIRE(file<<tree);
-
+  fout<<tree; fout<<-1;
+  fout.close();
+  ifstream fin("print_db.txt");
+  fin>>tree_2;
+  fin.close();
+  REQUIRE(tree_2.Search(7.77));
+  REQUIRE(tree_2.Search(3.33));
+  REQUIRE(tree_2.Search(5.55));
 }
 
 
@@ -175,8 +179,8 @@ REQUIRE(O==1);
 }
 
 SCENARIO("Iscl_not_open", "[I_no]"){
-Tree<int> tree; int O=0; ifstream file("errortype");
-try{file>>tree;}
+Tree<int> tree; int O=0; ifstream fin("errotypeoffile");
+try{fin>>tree;}
 catch(File_Not_Open &e){O++;}
 REQUIRE(O==1);
 }
@@ -189,9 +193,9 @@ REQUIRE(O==1);
 }
 
 SCENARIO("Iscl_pust2", "[I_p2]"){
-Tree<int> tree; int O=0; ofstream file("print_db.txt", ios::app);
-try{file<<tree;}
+Tree<int> tree; int O=0; ofstream fout("print_db.txt", ios::app);
+try{fout<<tree;}
 catch(Empty &e){O++;}
-file.close();
+fout.close();
 REQUIRE(O==1);
 }

@@ -92,8 +92,8 @@ REQUIRE(!tree.Search(2.34));
 }
 
 SCENARIO("Read_int","[read_i]"){
-Tree<int> tree; ifstream fin("read.txt");
-REQUIRE(fin>>tree);
+Tree<int> tree; ifstream file("read.txt");
+REQUIRE(file>>tree);
 fin.close();
 REQUIRE(tree.Search(7));
 REQUIRE(tree.Search(9));
@@ -103,8 +103,8 @@ REQUIRE(tree.Search(3));
 }
 
 SCENARIO("Read_double","[read_d]"){
-Tree<double> tree; ifstream fin("read_db.txt");
-REQUIRE(fin>>tree);
+Tree<double> tree; ifstream file("read_db.txt");
+REQUIRE(file>>tree);
 fin.close();
 REQUIRE(tree.Search(12.74));
 REQUIRE(tree.Search(15.62));
@@ -116,7 +116,7 @@ REQUIRE(tree.Search(17.16));
 }
 
 SCENARIO("Print_file_int","[print_file_i]"){
-Tree<int> tree; ofstream fout("print.txt", ios::app);
+Tree<int> tree; ofstream file("print.txt", ios::app);
   tree.Insert(7);
   tree.Insert(3);
   tree.Insert(5);
@@ -124,7 +124,7 @@ Tree<int> tree; ofstream fout("print.txt", ios::app);
 }
 
 SCENARIO("Print_file_char","[print_file_c]"){
-Tree<char> tree; ofstream fout("print_chr.txt", ios::app);
+Tree<char> tree; ofstream file("print_chr.txt", ios::app);
   tree.Insert(7);
   tree.Insert(3);
   tree.Insert(5);
@@ -133,7 +133,7 @@ Tree<char> tree; ofstream fout("print_chr.txt", ios::app);
 }
 
 SCENARIO("Print_file_double","[print_file_d]"){
-Tree<double> tree; ofstream fout("print_db.txt", ios::app);
+Tree<double> tree; ofstream file("print_db.txt", ios::app);
   tree.Insert(7.77);
   tree.Insert(3.33);
   tree.Insert(5.55);
@@ -175,8 +175,8 @@ REQUIRE(O==1);
 }
 
 SCENARIO("Iscl_not_open", "[I_no]"){
-Tree<int> tree; int O=0; ifstream fin("errortype");
-try{fin>>tree;}
+Tree<int> tree; int O=0; ifstream file("errortype");
+try{file>>tree;}
 catch(File_Not_Open &e){O++;}
 REQUIRE(O==1);
 }
@@ -189,7 +189,7 @@ REQUIRE(O==1);
 }
 
 SCENARIO("Iscl_pust2", "[I_p2]"){
-Tree<int> tree; int O=0; ofstream fout("print_db.txt", ios::app);
+Tree<int> tree; int O=0; ofstream file("print_db.txt", ios::app);
 try{fout<<tree;}
 catch(Empty &e){O++;}
 fout.close();

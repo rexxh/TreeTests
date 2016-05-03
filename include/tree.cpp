@@ -64,18 +64,18 @@ ostream & operator <<(ostream & out, Tree<T> & tree) {
 	else throw Empty();
 }
 template <class T>
-fstream & operator >>(ifstream & fin, Tree<T> & tree) {
+ifstream & operator >>(ifstream & fin, Tree<T> & tree) {
 	if (!fin.is_open()) throw File_Not_Open();
 	Z x;
 	while (!fin.eof()){
 		fin >> x;
-		if (x != -1)tree.Insert(x);
+		if(x!=-1)tree.Insert(x);
 		else break;
 	}
-	return true;
+	return fin;
 }
 template <class T>
-fstream & operator <<(ofstream & fout, Tree<T> & tree) {
+ofstream & operator <<(ofstream & fout, Tree<T> & tree) {
 	if (tree.root->print_file(fout)) return fout;
 	else throw Empty();
 }

@@ -66,7 +66,7 @@ ostream & operator <<(ostream & out, Tree<T> & tree) {
 template <class T>
 ifstream & operator >>(ifstream & fin, Tree<T> & tree) {
 	if (!fin.is_open()) throw File_Not_Open();
-	Z x;
+	T x;
 	while (!fin.eof()){
 		fin >> x;
 		if(x!=-1)tree.Insert(x);

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(TESTS_FOR_PROJECT tree)
+set(TESTS_FOR_PROJECT Tree)
 
 project(Tests)
 

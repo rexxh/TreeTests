@@ -58,60 +58,24 @@ bool Tree<T>::Search(T x){
 }
 
 
-template <class T>	
-	ostream & operator <<(ostream & os, Tree<T> & x) {
-		if (x.root == nullptr) {
-			throw Empty();
-		}
-		x.root->print_file(os);
-
-		return os;
+template <class T>
+ostream & operator <<(ostream & out, Tree<T> & tree) {
+	if (tree.root->print_console()) return out;
+	else throw Empty();
+}
+template <class T>
+fstream & operator >>(ifstream & fin, Tree<T> & tree) {
+	if (!fin.is_open()) throw File_Not_Open();
+	Z x;
+	while (!fin.eof()){
+		fin >> x;
+		if (x != -1)tree.Insert(x);
+		else break;
 	}
-
-	template <class T>	
-	istream & operator >>(istream & input, Tree<T> & x) {
-		T temp;
-		if (x.count == 0) {
-			throw Empty();
-		}
-		else {
-			for (size_t i = 0; i < x.count; ++i) {
-				if (input >> temp) {
-					x.Insert(temp);
-				}
-				else {
-					throw File_Not_Open();
-				}
-			}
-			return input;
-		}
-	}
-
-	template <class T>	
-	fstream & operator <<(fstream &file, Tree<T> & x) {
-		if (x.count == 0) {
-			throw Empty();
-		}
-		x.root->print_file(file);
-
-		return file;
-	}
-
-	template <class T>	
-	fstream & operator >>(fstream &file, Tree<T> & x) {
-		T temp;
-		if (x.count == 0) {
-			throw Empty();
-		}
-		else {
-			for (size_t i = 0; i < x.count; ++i) {
-				if (file >> temp) {
-					x.Insert(temp);
-				}
-				else {
-					throw File_Not_Open();
-				}
-			}
-			return file;
-		}
-	}
+	return true;
+}
+template <class T>
+fstream & operator <<(ofstream & fout, Tree<T> & tree) {
+	if (tree.root->print_file(fout)) return fout;
+	else throw Empty();
+}

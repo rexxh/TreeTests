@@ -94,7 +94,7 @@ REQUIRE(!tree.Search(2.34));
 SCENARIO("Read_int","[read_i]"){
 Tree<int> tree; ifstream file("read.txt");
 REQUIRE(file>>tree);
-fin.close();
+file.close();
 REQUIRE(tree.Search(7));
 REQUIRE(tree.Search(9));
 REQUIRE(tree.Search(5));
@@ -105,7 +105,7 @@ REQUIRE(tree.Search(3));
 SCENARIO("Read_double","[read_d]"){
 Tree<double> tree; ifstream file("read_db.txt");
 REQUIRE(file>>tree);
-fin.close();
+file.close();
 REQUIRE(tree.Search(12.74));
 REQUIRE(tree.Search(15.62));
 REQUIRE(tree.Search(7.62));

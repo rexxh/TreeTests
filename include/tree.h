@@ -7,11 +7,16 @@ template <class T>
 	class Tree;
 
 template <class T>
-	ostream & operator<<(ostream & os,Tree<T> &x);
+ostream & operator<<(ostream & output, Tree<T> &);
+
 template <class T>
-	fstream & operator<<(ofstream & fle,Tree<T> &x);
+istream & operator>>(istream & input, Tree<T> &);
+
 template <class T>
-	fstream & operator >> (ifstream & file,Tree<T> &x);
+fstream & operator<<(fstream & file, Tree<T> &);
+
+template <class T>
+fstream & operator>>(fstream & file, Tree<T> &);
 
 
 	//Класс исключений 
@@ -47,9 +52,10 @@ public:
 	Tree();
 	bool Insert(T x);// Добавление элемента 
 	bool Search(T x);// Поиск элемента 
-	friend ostream & operator<< <>(ostream &out, Tree<T> &tree);
-	friend fstream & operator<< <>(ofstream &fout, Tree<T> &tree);
-	friend fstream & operator>> <>(ifstream &fin, Tree<T> &tree);
+	friend		ostream & operator<< <>(ostream &output, Tree &);		
+	friend		istream & operator>> <>(istream &input, Tree &);		
+	friend		fstream & operator<< <>(fstream &file, Tree<T> &);		
+	friend		fstream & operator>> <>(fstream &file, Tree<T> &);		
 private:
 	class der;
 	der* root;//корень дерева

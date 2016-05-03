@@ -120,7 +120,7 @@ Tree<int> tree; ofstream file("print.txt", ios::app);
   tree.Insert(7);
   tree.Insert(3);
   tree.Insert(5);
-  REQUIRE(fout<<tree);
+  REQUIRE(file<<tree);
 }
 
 SCENARIO("Print_file_char","[print_file_c]"){
@@ -128,7 +128,7 @@ Tree<char> tree; ofstream file("print_chr.txt", ios::app);
   tree.Insert(7);
   tree.Insert(3);
   tree.Insert(5);
-  REQUIRE(fout<<tree);
+  REQUIRE(file<<tree);
 
 }
 
@@ -137,7 +137,7 @@ Tree<double> tree; ofstream file("print_db.txt", ios::app);
   tree.Insert(7.77);
   tree.Insert(3.33);
   tree.Insert(5.55);
-  REQUIRE(fout<<tree);
+  REQUIRE(file<<tree);
 
 }
 
@@ -190,8 +190,8 @@ REQUIRE(O==1);
 
 SCENARIO("Iscl_pust2", "[I_p2]"){
 Tree<int> tree; int O=0; ofstream file("print_db.txt", ios::app);
-try{fout<<tree;}
+try{file<<tree;}
 catch(Empty &e){O++;}
-fout.close();
+file.close();
 REQUIRE(O==1);
 }

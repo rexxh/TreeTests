@@ -5,11 +5,11 @@ template <class T>
 void Tree<T>::Root::Insert(T x){
 	if (x < D){
 		if (l != nullptr) l->Insert(x);
-		if (l == nullptr) l = new der(x);
+		if (l == nullptr) l = new Root(x);
 	}
 	if (x>D){
 		if (r != nullptr) r->Insert(x);
-		if (r == nullptr) r = new der(x);
+		if (r == nullptr) r = new Root(x);
 	}
 }
 template <class T>
@@ -47,7 +47,7 @@ Tree<T>::Tree() : root(nullptr){}
 template <class T>
 bool Tree<T>::Insert(T x){
 	if (root != nullptr) if (Search(x)) throw Exist();
-	if (root == nullptr) { root = new der(x); return true; }
+	if (root == nullptr) { root = new Root(x); return true; }
 	else { root->Insert(x); return true; }
 	return false;
 }

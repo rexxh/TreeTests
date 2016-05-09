@@ -47,6 +47,7 @@ template <class T>
 class Tree{
 public:
 	Tree();
+	~Tree();
 	bool Insert(T x);// Добавление элемента 
 	bool Search(T x);// Поиск элемента 
 	friend ostream & operator<< <>(ostream &out, Tree<T> &tree);

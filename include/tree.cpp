@@ -1,8 +1,8 @@
 #include "tree.h"  
 template <class T>
-Tree<T>::der::der(T x) : D(x), l(nullptr), r(nullptr){}
+Tree<T>::Root::Root(T x) : D(x), l(nullptr), r(nullptr){}
 template <class T>
-void Tree<T>::der::Insert(T x){
+void Tree<T>::Root::Insert(T x){
 	if (x < D){
 		if (l != nullptr) l->Insert(x);
 		if (l == nullptr) l = new der(x);
@@ -13,14 +13,14 @@ void Tree<T>::der::Insert(T x){
 	}
 }
 template <class T>
-bool Tree<T>::der::Search(T x){
+bool Tree<T>::Root::Search(T x){
 	if (x == D) { return true; }
 	if (x > D) if (r != nullptr) return(r->Search(x));
 	if (x < D) if (l != nullptr) return(l->Search(x));
 	return false;
 }
 template <class T>
-bool Tree<T>::der::print_console(){
+bool Tree<T>::Root::print_console(){
 	if (this != nullptr){
 		if (l != nullptr) l->print_console();
 		cout << D << " ";
@@ -30,7 +30,7 @@ bool Tree<T>::der::print_console(){
 	else return false;
 }
 template <class T>
-bool Tree<T>::der::print_file(ofstream &fout){
+bool Tree<T>::Root::print_file(ofstream &fout){
 	if (this != nullptr){
 		if (fout.is_open()){
 			if (l != nullptr) l->print_file(fout);

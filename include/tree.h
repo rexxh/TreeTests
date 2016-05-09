@@ -53,20 +53,22 @@ public:
 	friend ofstream & operator<< <>(ofstream &fout, Tree<T> &tree);		
 	friend ifstream & operator>> <>(ifstream &fin, Tree<T> &tree);		
 private:
-	class der;
-	der* root;//корень дерева
+	class Root;
+	Root* root; //корень дерева
 };
 
 template <class T>
-class Tree<T>::der{
+class Tree<T>::Root{
 public:
-	der(T x);
+	Root(T x);
 	void Insert(T x);
 	bool Search(T x);
 	bool print_console();
 	bool print_file(ofstream &fout);
+	void del(T el);
+	T find_min (Root* el);
 private:
 	T D;
-	der *l;
-	der *r;
+	Root *l;
+	Root *r;
 };

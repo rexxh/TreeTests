@@ -199,3 +199,73 @@ catch(Empty &e){O++;}
 fout.close();
 REQUIRE(O==1);
 }
+
+
+SCENARIO("Del", "[del]"){
+Tree<int> tree; int с=0;
+tree.add(1);
+tree.add(4);
+tree.add(10);
+tree.add(3);
+tree.add(5);
+tree.add(8);
+tree.add(11);
+//Удаляем корнень
+REQUIRE(tree.del(1));
+REQUIRE(!tree.search(1));
+REQUIRE(tree.search(4));
+REQUIRE(tree.search(10));
+REQUIRE(tree.search(3));
+REQUIRE(tree.search(5));
+REQUIRE(tree.search(8));
+REQUIRE(tree.search(11));
+//Удаляем элемент с 2мя поддеревьями
+REQUIRE(tree.del(4));
+REQUIRE(!tree.search(1));
+REQUIRE(!tree.search(4));
+REQUIRE(tree.search(10));
+REQUIRE(tree.search(3));
+REQUIRE(tree.search(5));
+REQUIRE(tree.search(8));
+REQUIRE(tree.search(11));
+//Удаляем элемент с 1 поддеревом
+REQUIRE(tree.del(5));
+REQUIRE(!tree.search(1));
+REQUIRE(!tree.search(4));
+REQUIRE(tree.search(10));
+REQUIRE(tree.search(3));
+REQUIRE(!tree.search(5));
+REQUIRE(tree.search(8));
+REQUIRE(tree.search(11));
+//Удаляем лист
+REQUIRE(tree.del(3));
+REQUIRE(!tree.search(1));
+REQUIRE(!tree.search(4));
+REQUIRE(tree.search(10));
+REQUIRE(!tree.search(3));
+REQUIRE(!tree.search(5));
+REQUIRE(tree.search(8));
+REQUIRE(tree.search(11));
+//Удаляем элемент с 1 поддеревом
+REQUIRE(tree.del(10));
+REQUIRE(!tree.search(1));
+REQUIRE(!tree.search(4));
+REQUIRE(!tree.search(10));
+REQUIRE(!tree.search(3));
+REQUIRE(!tree.search(5));
+REQUIRE(tree.search(8));
+REQUIRE(tree.search(11));
+//Удаляем лист
+REQUIRE(tree.del(11));
+REQUIRE(!tree.search(1));
+REQUIRE(!tree.search(4));
+REQUIRE(!tree.search(10));
+REQUIRE(!tree.search(3));
+REQUIRE(!tree.search(5));
+REQUIRE(tree.search(8));
+REQUIRE(!tree.search(11));
+//Удаляем последний элемент
+try{ tree.del(8);}
+catch(Deleted &){с++;}//Дерево содается заново
+REQUIRE(с==1);
+}

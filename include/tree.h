@@ -52,17 +52,24 @@ Deleted::Deleted() : Exceptions("ERROR: It was deleted before") {}
 template <class T>
 class Tree {
 public:
-	Tree();
+	Tree(initializer_list<T> ilist):root(nullptr) {
+	for (auto element : ilist) tree.Insert(element);
+	};
+	/*~Tree();*/
 	bool Insert(T x);// Добавление элемента 
 	bool Search(T x);// Поиск элемента 
 	bool del(T x); //удаление узла дерева
+	/*void destroy_tree();*/
 	friend ostream & operator<< <>(ostream &out, Tree<T> &tree);
 	friend ofstream & operator<< <>(ofstream &fout, Tree<T> &tree);
 	friend ifstream & operator >> <>(ifstream &fin, Tree<T> &tree);
-private:
 	class Root;
 	Root* root; //корень дерева
+private:
+	set<T> tree;
+	
 };
+
 
 template <class T>
 class Tree<T>::Root {

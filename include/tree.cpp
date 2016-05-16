@@ -1,7 +1,7 @@
 #include "tree.h"  
 template <class T>
 Tree<T>::Root::Root(T x) : D(x), l(nullptr), r(nullptr) {}
-
+ 
  
 template <class T>
 T Tree<T>::Root::find_min(Root* tree) {

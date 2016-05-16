@@ -81,8 +81,6 @@ bool Tree<T>::Root::print_file(ofstream &fout) {
 }
 
 template <class T>
-Tree<T>::Tree() : root(nullptr) {}
-template <class T>
 bool Tree<T>::Insert(T x) {
 	if (root != nullptr) if (Search(x)) throw Exist();
 	if (root == nullptr) { root = new Root(x); return true; }

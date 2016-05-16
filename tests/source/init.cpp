@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-SCENARIO("Add_int", "[add]"){
+/*SCENARIO("Add_int", "[add]"){
   Tree<int> tree;
   REQUIRE(tree.Insert(7));
   REQUIRE(tree.Insert(3));
@@ -13,14 +13,14 @@ SCENARIO("Add_int", "[add]"){
   REQUIRE(tree.Search(5));
   REQUIRE(tree.Search(7));
 }
-
+*/
 SCENARIO("Add_int", "[add_l]"){
   Tree<int> tree{1,2,3};
   REQUIRE(tree.Search(1));
   REQUIRE(tree.Search(2));
   REQUIRE(tree.Search(3));
 }
-
+/*
 SCENARIO("Add_char", "[add_c]"){
   Tree<char> tree;
   REQUIRE(tree.Insert(5));
@@ -276,3 +276,4 @@ try{ tree.del(8);}
 catch(Deleted &){O++;}
 REQUIRE(O==1);
 }
+*/

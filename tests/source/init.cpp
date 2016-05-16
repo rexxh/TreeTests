@@ -202,7 +202,7 @@ REQUIRE(O==1);
 
 
 SCENARIO("Del", "[del]"){
-Tree<int> tree; int с=0;
+Tree<int> tree; int O=0;
 tree.Insert(1);
 tree.Insert(4);
 tree.Insert(10);
@@ -266,6 +266,6 @@ REQUIRE(tree.Search(8));
 REQUIRE(!tree.Search(11));
 //Удаляем последний элемент
 try{ tree.del(8);}
-catch(Deleted &){с++;}
-REQUIRE(с==1);
+catch(Deleted &){O++;}
+REQUIRE(O==1);
 }

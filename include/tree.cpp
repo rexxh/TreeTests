@@ -5,7 +5,7 @@ Tree<T>::Root::Root(T x) : D(x), l(nullptr), r(nullptr) {}
  
 template <class T>
 T Tree<T>::Root::find_min(Root* tree) {
-	if (tree->l) return min(tree->l);
+	if (tree->l) return find_min(tree->l);
 	else return tree->D;
 }
 template <class T>

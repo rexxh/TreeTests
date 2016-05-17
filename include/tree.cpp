@@ -14,8 +14,7 @@ Tree<T>::~Tree() {
 	if(root){
 	root->destroy(root);
 	}
-}
-
+} 
 template <class T>
 void Tree<T>::Root::destroy(Root* root) {
 	if (root !=nullptr){ ;

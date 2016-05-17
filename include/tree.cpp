@@ -127,7 +127,7 @@ bool Tree<T>::Search(T x) {
 template <class T>
 bool Tree<T>::del(T x) {
 	if (root == nullptr) throw Empty();
-	if (!this->search(x)) throw Exist();
+	if (!this->Search(x)) throw Exist();
 	try { root->del(x); }
 	catch (Deleted &) { throw Deleted(); }
 	return true;

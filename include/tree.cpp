@@ -11,7 +11,9 @@ Tree<T>::Tree(const std::initializer_list<T> & ilist) {
    
 template <class T>
 Tree<T>::~Tree() {
+	if(root){
 	root->destroy(root);
+	}
 }
 
 template <class T>
@@ -44,7 +46,7 @@ T Tree<T>::Root::find_min(Root* tree) {
 
 template <class T>
 void Tree<T>::Root::del(T x) {
-	if ((x == D) && (!l) && (!r)) { delete this; throw Deleted(); }
+	if ((x == D) && (!l) && (!r)) {Root* root= nullptr; throw Deleted(); }
 	if ((x == D) && (!l)) {
 		D = r->D;
 		if (r->l) l = r->l; else { delete[] l; l = nullptr; }

@@ -11,13 +11,12 @@ Tree<T>::Tree(const std::initializer_list<T> & ilist) {
  
 template <class T>
 Tree<T>::~Tree() {
-	if(root!=nullptr){
-	root->destroy(root);}else {throw Empty();}
+	root->destroy(root);
 }
 
 template <class T>
 void Tree<T>::Root::destroy(Root* root) {
-	if (!root) return;
+	if (root !=nullptr){ ;
 	if (root->l)
 	{
 		destroy(root->l);
@@ -29,6 +28,7 @@ void Tree<T>::Root::destroy(Root* root) {
 		root->r = 0;
 	}
 	delete root;
+	}
 }
 
 

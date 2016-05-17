@@ -53,37 +53,40 @@ Deleted::Deleted() : Exceptions("ERROR: It was deleted before") {}
 template <class T>
 class Tree {
 public:
-	Tree(initializer_list<T> ilist):root(nullptr) {
-	for (auto element : ilist) tree.Insert(element);
-	};
-	/*~Tree();*/
+	Tree() :root(nullptr) {};
+	Tree(const std::initializer_list<T> & ilist);
+
+
+	~Tree();
 	bool Insert(T x);// Добавление элемента 
 	bool Search(T x);// Поиск элемента 
 	bool del(T x); //удаление узла дерева
-	/*void destroy_tree();*/
 	friend ostream & operator<< <>(ostream &out, Tree<T> &tree);
 	friend ofstream & operator<< <>(ofstream &fout, Tree<T> &tree);
 	friend ifstream & operator >> <>(ifstream &fin, Tree<T> &tree);
 	class Root;
 	Root* root; //корень дерева
-private:
-	set<T> tree;
-	
-};
 
+private:
+
+
+};
 
 template <class T>
 class Tree<T>::Root {
 public:
 	Root(T x);
+	void destroy(Root* root);
 	void Insert(T x);
 	bool Search(T x);
 	bool print_console();
 	bool print_file(ofstream &fout);
 	void del(T el);
 	T find_min(Root* el);
+	T get_data() { return D; };
 private:
 	T D;
 	Root *l;
 	Root *r;
 };
+

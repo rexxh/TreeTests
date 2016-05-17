@@ -38,6 +38,10 @@ class Deleted : public Exceptions {
 public:
 	Deleted();
 };
+class Error_stream : public Exceptions {
+public:
+	Error_stream();
+};
 
 Exceptions::Exceptions(char* _err) : err(_err) {}
 char* Exceptions::what() { return err; }
@@ -45,13 +49,14 @@ Exist::Exist() : Exceptions("ERROR: It's already exist!") {}
 File_Not_Open::File_Not_Open() : Exceptions("ERROR: file is not open!") {}
 Empty::Empty() : Exceptions("ERROR: The Binary Tree is empty!") {}
 Deleted::Deleted() : Exceptions("ERROR: It was deleted before") {}
-
+Error_stream::Error_stream() : Exceptions("ERROR: Stream error") {}
 
 
 template <class T>
 class Tree {
 public:
-	Tree() :root(nullptr) {};
+T c;
+	Tree() :root(nullptr),c(0) {};
 	Tree(const std::initializer_list<T> & ilist);
 
 
@@ -59,9 +64,10 @@ public:
 	bool Insert(T x);// Добавление элемента 
 	bool Search(T x);// Поиск элемента 
 	bool del(T x); //удаление узла дерева
-	friend ostream & operator<< <>(ostream &out, Tree<T> &tree);
-	friend ofstream & operator<< <>(ofstream &fout, Tree<T> &tree);
-	friend ifstream & operator >> <>(ifstream &fin, Tree<T> &tree);
+	friend ostream & operator<<(ostream & output, Tree<T> &);
+	friend istream & operator >> (istream & input, Tree<T> &);
+	friend fstream & operator<<(fstream & file, Tree<T> &);
+	friend fstream & operator >> (fstream & file, Tree<T> &);
 	class Root;
 	Root* root; //корень дерева
 

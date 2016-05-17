@@ -11,7 +11,8 @@ Tree<T>::Tree(const std::initializer_list<T> & ilist) {
  
 template <class T>
 Tree<T>::~Tree() {
-	root->destroy(root);
+	if(root!=nullptr){
+	root->destroy(root);}else {throw Empty();}
 }
 
 template <class T>

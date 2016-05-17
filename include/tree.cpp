@@ -135,24 +135,50 @@ bool Tree<T>::del(T x) {
 	return true;
 }
 
-template <class T>
-ostream & operator <<(ostream & out, Tree<T> & tree) {
-	if (tree.root->print_console()) return out;
+template <typename T>
+ostream & operator <<(ostream & os, Tree<T> & x) {
+	if (tree.root->print_console()) return os;
 	else throw Empty();
 }
-template <class T>
-ifstream & operator >> (ifstream & fin, Tree<T> & tree) {
-	if (!fin.is_open()) throw File_Not_Open();
+
+
+
+template <typename T>	
+istream & operator >> (istream & input, Tree<T> & x) {
+	T temp;
+	if (x.c == 0) {
+		throw Empty();
+	}
+	else {
+		for (size_t i = 0; i < x.c; ++i) {
+			if (input >> temp) {
+				x.Insert(temp);
+			}
+			else {
+				throw Error_stream();
+			}
+		}
+		return input;
+	}
+}
+
+
+
+
+template <typename T>
+fstream & operator <<(fstream &file, Tree<T> & x) {
+	if (tree.root->print_file(file)) return file;
+	else throw Empty();
+}
+
+template <typename T>	
+fstream & operator >> (fstream &file, Tree<T> & x) {
+	if (!file.is_open()) throw File_Not_Open();
 	T x;
-	while (!fin.eof()) {
-		fin >> x;
+	while (!file.eof()) {
+		file >> x;
 		if (x != -1)tree.Insert(x);
 		else break;
 	}
-	return fin;
-}
-template <class T>
-ofstream & operator <<(ofstream & fout, Tree<T> & tree) {
-	if (tree.root->print_file(fout)) return fout;
-	else throw Empty();
-}
+	return file;
+	}

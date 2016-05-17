@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 using namespace std;
-
+ 
 SCENARIO("Add_int", "[add]"){
   Tree<int> tree;
   REQUIRE(tree.Insert(7));

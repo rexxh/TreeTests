@@ -14,7 +14,7 @@ SCENARIO("Add_int", "[add]"){
   REQUIRE(tree.Search(7));
 }
 
-SCENARIO("Add_int", "[add_l]"){
+SCENARIO("Add_int999", "[add_l]"){
   Tree<int> tree{1,2,3};
   REQUIRE(tree.Search(1));
   REQUIRE(tree.Search(2));

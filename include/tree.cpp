@@ -174,10 +174,10 @@ fstream & operator <<(fstream &file, Tree<T> & x) {
 template <typename T>	
 fstream & operator >> (fstream &file, Tree<T> & x) {
 	if (!file.is_open()) throw File_Not_Open();
-	T x;
+	T y;
 	while (!file.eof()) {
-		file >> x;
-		if (x != -1)tree.Insert(x);
+		file >> y;
+		if (y != -1) file.Insert(x);
 		else break;
 	}
 	return file;

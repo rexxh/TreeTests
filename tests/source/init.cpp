@@ -200,7 +200,7 @@ fout.close();
 REQUIRE(O==1);
 }
 
-
+/*
 SCENARIO("Del", "[del]"){
 Tree<int> tree; int O=0;
 tree.Insert(1);
@@ -269,7 +269,7 @@ try{ tree.del(8);}
 catch(Deleted &){O++;}
 REQUIRE(O==1);
 }
-
+*/
 SCENARIO("Add_int999", "[add_l]"){
   Tree<int> tree{1,2,3};
   REQUIRE(tree.Search(1));

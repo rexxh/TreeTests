@@ -1,13 +1,46 @@
 #include "tree.h"  
 template <class T>
 Tree<T>::Root::Root(T x) : D(x), l(nullptr), r(nullptr) {}
-  
- 
+template <class T>
+Tree<T>::Tree(const std::initializer_list<T> & ilist) {
+
+	for (T element : ilist) {
+		Insert(element);
+	}
+};
+
+template <class T>
+Tree<T>::~Tree() {
+	root->destroy(root);
+}
+
+template <class T>
+void Tree<T>::Root::destroy(Root* root) {
+	if (!root) return;
+	if (root->l)
+	{
+		destroy(root->l);
+		root->l = 0;
+	}
+	if (root->r != 0)
+	{
+		destroy(root->r);
+		root->r = 0;
+	}
+	delete root;
+}
+
+
 template <class T>
 T Tree<T>::Root::find_min(Root* tree) {
 	if (tree->l) return find_min(tree->l);
 	else return tree->D;
 }
+
+
+
+
+
 template <class T>
 void Tree<T>::Root::del(T x) {
 	if ((x == D) && (!l) && (!r)) { delete this; throw Deleted(); }
@@ -79,7 +112,6 @@ bool Tree<T>::Root::print_file(ofstream &fout) {
 	}
 	return false;
 }
-
 template <class T>
 bool Tree<T>::Insert(T x) {
 	if (root != nullptr) if (Search(x)) throw Exist();
@@ -95,7 +127,7 @@ bool Tree<T>::Search(T x) {
 template <class T>
 bool Tree<T>::del(T x) {
 	if (root == nullptr) throw Empty();
-	if (!this->Search(x)) throw Exist();
+	if (!this->search(x)) throw Exist();
 	try { root->del(x); }
 	catch (Deleted &) { throw Deleted(); }
 	return true;

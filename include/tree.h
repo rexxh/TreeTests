@@ -20,7 +20,7 @@ istream & operator>> (istream & in, Tree<T> &tree);
 
 //Класс исключений 
 class Exceptions { 
-char* err; 
+char* err;  
 public: 
 Exceptions(char* _err); 
 char* what(); 

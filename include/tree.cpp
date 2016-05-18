@@ -19,6 +19,7 @@ template <class T>
 void Tree<T>::Root::destroy(Root* root) {
 	if (root !=nullptr){ ;
 	if (root->l)
+	delete root;
 	{
 		destroy(root->l);
 		root->l = 0;

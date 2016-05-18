@@ -64,10 +64,9 @@ T c;
 	bool Insert(T x);// Добавление элемента 
 	bool Search(T x);// Поиск элемента 
 	bool del(T x); //удаление узла дерева
-	friend ostream & operator<<(ostream & output, Tree<T> &);
-	friend istream & operator >> (istream & input, Tree<T> &);
-	friend fstream & operator<<(fstream & file, Tree<T> &);
-	friend fstream & operator >> (fstream & file, Tree<T> &);
+	friend ostream & operator<< <>(ostream &out, BinarySearchTree<Z> &tree);
+	friend ofstream & operator<< <>(ofstream &fout, BinarySearchTree<Z> &tree);		
+	friend ifstream & operator>> <>(ifstream &fin, BinarySearchTree<Z> &tree);
 	class Root;
 	Root* root; //корень дерева
 

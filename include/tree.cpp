@@ -52,6 +52,9 @@ T Tree<T>::Root::find_min(Root* tree) {
 
 template <class T>
 void Tree<T>::Root::del(T x) {
+	if ((x == D) && (!l)&&(!r)) {
+		Root* root=nullptr;
+	}
 	if ((x == D) && (!l)) {
 		D = r->D;
 		if (r->l) l = r->l; else { delete[] l; l = nullptr; --size_; }
@@ -143,9 +146,9 @@ bool Tree<T>::del(T x) {
 	if (root == nullptr) throw Empty();
 	if (!this->Search(x)) throw Exist();
 	if (this->size()==1) {
-		root = nullptr;
+			Root* root = nullptr;
 		delete root;
-		Root* root = nullptr;
+	
 		
 	}
 	else {

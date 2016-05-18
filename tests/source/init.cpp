@@ -291,7 +291,7 @@ SCENARIO("BST search non inserted element", "[search]") {
 Tree<int> tree {8, 4, 3};
 	REQUIRE( !tree.Search(5) );
 }
-
+ 
 SCENARIO("BST delete non inserted element", "[delete]") {
 	Tree<int> tree {8};
 	REQUIRE( !tree.del(4) );

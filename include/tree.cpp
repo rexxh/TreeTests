@@ -114,7 +114,7 @@ void Tree<T>::Root::Insert(T x) {
 	if (x < D) {
 		if (l != nullptr) l->Insert(x);
 		if (l == nullptr) l = new Root(x);
-		++size;
+		++size_;
 	}
 	if (x>D) {
 		if (r != nullptr) r->Insert(x);

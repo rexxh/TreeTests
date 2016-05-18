@@ -11,7 +11,9 @@ Insert(element);
 
 template <class T>
 Tree<T>::~Tree() {
-if(root) root->destroy(root)
+if(root){
+root->destroy(root);
+}
 } 
 template <class T>
 void Tree<T>::Root::destroy(Root* root) {

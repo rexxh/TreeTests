@@ -1,20 +1,65 @@
-#include "tree.h"  
+
+template <class T>
+auto Tree<T>::fillListOfNodes(list<const Root*> & listOfNodes, const Root* root) -> void
+{
+	if (root) {
+		if (root->l != nullptr) {
+			fillListOfNodes(listOfNodes, root->l);
+		}
+
+		listOfNodes.push_back(root);
+
+		if (root->r != nullptr) {
+			fillListOfNodes(listOfNodes, root->r);
+		}
+	}
+}
+template <class T>
+auto Tree<T>::begin() const -> iterator
+{
+	return iterator(root);
+}
+template <class T>
+auto Tree<T>::end() const -> iterator
+{
+	return iterator();
+}
+
+template <class T>
+auto Tree<T>::operator == (const Tree & tree) -> bool
+{
+	if (size_ != tree.size_) {
+		return false;
+	}
+
+	iterator i = begin();
+	iterator j = tree.begin();
+	for (; i != end() || j != tree.end(); ++i, ++j) {
+		if (*i != *j) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+
 template <class T>
 Tree<T>::Root::Root(T x) : D(x), l(nullptr), r(nullptr) {}
 template <class T>
-Tree<T>::Tree(const std::initializer_list<T> & ilist) {
+Tree<T>::Tree(const initializer_list<T> & ilist) {
 
 	for (T element : ilist) {
 		Insert(element);
 	}
-}; 
-    
+};
 template <class T>
 Tree<T>::~Tree() {
-	if(root){
-	root->destroy(root);
+	if (root) {
+		root->destroy(root);
 	}
-} 
+}
 template <class T>
 void Tree<T>::Root::destroy(Root* root) {
 
@@ -27,60 +72,54 @@ void Tree<T>::Root::destroy(Root* root) {
 		destroy(root->r);
 	}
 	delete root;
-	root=nullptr;
+	root = nullptr;
 }
-
-
 template <class T>
 T Tree<T>::Root::find_min(Root* tree) {
 	if (tree->l) return find_min(tree->l);
 	else return tree->D;
 }
-
-
-
-
-
 template <class T>
 void Tree<T>::Root::del(T x) {
-	if ((x == D) && (!l) && (!r)) {Root* root= nullptr; throw Deleted(); }
+	if ((x == D) && (!l) && (!r)) { Root* root = nullptr; throw Deleted(); }
 	if ((x == D) && (!l)) {
 		D = r->D;
-		if (r->l) l = r->l; else { delete[] l; l = nullptr; }
-		if (r->r) r = r->r; else { delete[] r; r = nullptr; }
+		if (r->l) l = r->l; else { delete l; l = nullptr; }
+		if (r->r) r = r->r; else { delete r; r = nullptr; }
 		return;
 	}
 	if ((x == D) && (!r)) {
 		D = l->D;
-		if (l->r) r = l->r; else { delete[] r; r = nullptr; }
-		if (l->l) l = l->l; else { delete[] l; l = nullptr; }
+		if (l->r) r = l->r; else { delete r; r = nullptr; }
+		if (l->l) l = l->l; else { delete l; l = nullptr; }
 		return;
 	}
 	if (x < D) {
-		if ((l->D == x) && (!(l->r)) && (!(l->l))) { delete[] l; l = nullptr; return; }
-		if ((l->D == x) && (l->l) && (l->r)) { l->D = find_min(l->r); if (l->r->D != find_min(l->r)) l->r->del(find_min(l->r)); else { delete[] l->r; l->r = nullptr; } return; }
+		if ((l->D == x) && (!(l->r)) && (!(l->l))) { delete l; l = nullptr; return; }
+		if ((l->D == x) && (l->l) && (l->r)) { l->D = find_min(l->r); if (l->r->D != find_min(l->r)) l->r->del(find_min(l->r)); else { delete l->r; l->r = nullptr; } return; }
 		else; l->del(x);
 		return;
 	}
 	if (x > D) {
-		if ((r->D == x) && (!(r->r)) && (!(r->l))) { delete[] r; r = nullptr; return; }
-		if ((r->D == x) && (r->l) && (r->r)) { r->D = find_min(r->r); if (r->r->D != find_min(r->r)) r->r->del(find_min(r->r)); else { delete[] r->r; r->r = nullptr; } return; }
+		if ((r->D == x) && (!(r->r)) && (!(r->l))) { delete r; r = nullptr; return; }
+		if ((r->D == x) && (r->l) && (r->r)) { r->D = find_min(r->r); if (r->r->D != find_min(r->r)) r->r->del(find_min(r->r)); else { delete r->r; r->r = nullptr; } return; }
 		else r->del(x);
 		return;
 	}
-	if ((x == D) && (l) && (r)) { D = find_min(r); if (r->D != find_min(r)) r->del(find_min(r)); else { delete[]r; r = nullptr; } return; }
+	if ((x == D) && (l) && (r)) { D = find_min(r); if (r->D != find_min(r)) r->del(find_min(r)); else { delete r; r = nullptr; } return; }
+	--size_;
 }
-
-
 template <class T>
 void Tree<T>::Root::Insert(T x) {
 	if (x < D) {
 		if (l != nullptr) l->Insert(x);
 		if (l == nullptr) l = new Root(x);
+		++size;
 	}
 	if (x>D) {
 		if (r != nullptr) r->Insert(x);
 		if (r == nullptr) r = new Root(x);
+		++size_;
 	}
 }
 template <class T>
@@ -139,27 +178,48 @@ ostream & operator <<(ostream & out, Tree<T> & tree) {
 	else throw Empty();
 }
 template <class T>
-ifstream& operator >>(ifstream & fin, Tree<T> & tree) {
+ifstream& operator >> (ifstream & fin, Tree<T> & tree) {
 	if (!fin.is_open()) throw File_Not_Open();
 	T x;
-	while (!fin.eof()){
-		if (fin>>x) tree.Insert(x);
+	while (!fin.eof()) {
+		if (fin >> x) tree.Insert(x);
 		else break;
 	}
 	return fin;
 }
+
 template <class T>
-ofstream & operator <<(ofstream & fout, Tree<T> & tree) {
-	if (tree.root->print_file(fout)) return fout;else throw Empty();}
-	
+auto Tree<T>::serialize(ofstream & out, Root* root) const -> void
+{
+	out << root->D << ' ';
+	if (root->l) {
+		serialize(out, root->l);
+	}
+	if (root->r) {
+		serialize(out, root->r);
+	}
+}
+
+
+template <class T>
+ofstream & operator << (ofstream & out, const Tree<T> &tree)
+{
+	out << tree.size_ << ' ';
+	if (tree.root) {
+		tree.serialize(out, tree.root);
+	}
+
+	return out;
+}
+
 template <class T>
 istream & operator >> (istream & in, Tree<T> & tree) {
 	size_t size;
 	if (in >> size) {
-	for (int i= 0; i < size; ++i) {
-	T temp;
-		if (in >> temp) {
-			tree.Insert(temp);
+		for (int i = 0; i < size; ++i) {
+			T temp;
+			if (in >> temp) {
+				tree.Insert(temp);
 			}
 			else {
 				throw Error_stream();
@@ -173,4 +233,35 @@ istream & operator >> (istream & in, Tree<T> & tree) {
 	return in;
 
 
+}
+
+template <class T>
+Tree<T>::RootIterator::RootIterator(const Root* root) : RootIterator()
+{
+	fillListOfNodes(history_, root);
+}
+
+template <class T>
+auto Tree<T>::RootIterator::operator == (const RootIterator & _iterator) -> bool
+{
+	return this->history_ == _iterator.history_;
+}
+
+template <class T>
+auto Tree<T>::RootIterator::operator != (const RootIterator & _iterator) -> bool
+{
+	return !this->operator==(_iterator);
+}
+
+template <class T>
+auto Tree<T>::RootIterator::operator ++() -> RootIterator
+{
+	history_.pop_front();
+	return *this;
+}
+
+template <class T>
+auto Tree<T>::RootIterator::operator *() const -> const T &
+{
+	return history_.front()->D;
 }

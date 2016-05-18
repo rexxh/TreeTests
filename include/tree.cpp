@@ -12,7 +12,8 @@ Insert(element);
 template <class T>
 Tree<T>::~Tree() {
 if(root){
-root->destroy(root);
+root->destroy(root)
+delete [];
 }
 } 
 template <class T>

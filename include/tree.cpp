@@ -8,7 +8,7 @@ for (T element : ilist) {
 Insert(element);
 }
 }; 
-
+ 
 template <class T>
 Tree<T>::~Tree() {
 if(root){

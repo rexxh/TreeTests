@@ -14,6 +14,9 @@ ofstream & operator<<(ofstream & fout, Tree<T> &tree);
 template <class T>
 ifstream & operator >> (ifstream & fin, Tree<T> &tree);
 
+template <class T>
+istream & operator >> (istream & in, Tree<T> &tree);
+
 
 //Класс исключений 
 class Exceptions {
@@ -67,6 +70,7 @@ T c;
 	friend ostream & operator<< <>(ostream &out, Tree<T> &tree);
 	friend ofstream & operator<< <>(ofstream &fout, Tree<T> &tree);		
 	friend ifstream & operator>> <>(ifstream &fin, Tree<T> &tree);
+	friend istream & operator >> <>(istream & in, Tree<T> &tree);
 	class Root;
 	Root* root; //корень дерева
 

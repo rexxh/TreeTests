@@ -128,12 +128,12 @@ return true;
 }
 
 template <class T>
-ostream & operator «(ostream & out, Tree<T> & tree) {
+ostream & operator <<(ostream & out, Tree<T> & tree) {
 if (tree.root->print_console()) return out;
 else throw Empty();
 }
 template <class T>
-ifstream& operator »(ifstream & fin, Tree<T> & tree) {
+ifstream& operator >>(ifstream & fin, Tree<T> & tree) {
 if (!fin.is_open()) throw File_Not_Open();
 T x;
 while (!fin.eof()){
@@ -143,11 +143,11 @@ else break;
 return fin;
 }
 template <class T>
-ofstream & operator «(ofstream & fout, Tree<T> & tree) {
+ofstream & operator <<(ofstream & fout, Tree<T> & tree) {
 if (tree.root->print_file(fout)) return fout;else throw Empty();}
 
 template <class T>
-istream & operator » (istream & in, Tree<T> & tree) {
+istream & operator >> (istream & in, Tree<T> & tree) {
 size_t size;
 if (in » size) {
 for (int i= 0; i < size; ++i) {

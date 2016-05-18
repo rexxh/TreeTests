@@ -25,7 +25,7 @@ Tree<T>::Tree(const std::initializer_list<T> & ilist) {
 
 template <class T>
 Tree<T>::~Tree() {
-	if (root) {
+	if (root!=nullptr) {
 		root->destroy(root);
 	}
 }
@@ -146,9 +146,9 @@ bool Tree<T>::del(T x) {
 	if (root == nullptr) throw Empty();
 	if (!this->Search(x)) throw Exist();
 	if (this->size()==1) {
-			Root* root = nullptr;
+		root = nullptr;
 		delete root;
-	
+	root = nullptr;
 		
 	}
 	else {

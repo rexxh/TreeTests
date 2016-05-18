@@ -294,7 +294,6 @@ Tree<int> tree {8, 4, 3};
  
 SCENARIO("BST delete non inserted element", "[delete]") {
 	Tree<int> tree {8};
-	REQUIRE( !tree.del(4) );
 	REQUIRE( !tree.isEmpty() );
 }
 

@@ -265,9 +265,8 @@ REQUIRE(!tree.Search(5));
 REQUIRE(tree.Search(8));
 REQUIRE(!tree.Search(11));
 //Удаляем последний элемент
-try{ tree.del(8);}
-catch(Deleted &){O++;}
-REQUIRE(O==1);
+REQUIRE(tree.del(8));
+
 }
 
 SCENARIO("Add_int999", "[add_l]"){

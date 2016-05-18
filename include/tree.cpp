@@ -23,9 +23,9 @@ size_t Tree<T>::size() {
 
 template <class T>
 bool Tree<T>::isEmpty() {
-	if (def) {
-		return false;
-	}else return true;
+	if (root->size2 ==0) {
+		return true;
+	}else return false;
 };
 
 

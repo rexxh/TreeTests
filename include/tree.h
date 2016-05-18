@@ -57,11 +57,12 @@ Error_stream::Error_stream() : Exceptions("ERROR: Stream error") {}
 
 template <class T>
 class Tree {
+	
+public:
 	class RootIterator;
 	using iterator = RootIterator;
-public:
 	int size_;
-	Tree() :root(nullptr), size(0) {};
+	Tree() :root(nullptr), size_(0) {};
 	Tree(const initializer_list<T> & ilist);
 	~Tree();
 	auto begin() const->iterator;

@@ -62,7 +62,7 @@ public:
 	class RootIterator;
 	using iterator = RootIterator;
 	static int size_;
-	Tree() :root(nullptr), size_(0) {};
+	Tree() :root(nullptr) {};
 	Tree(const initializer_list<T> & ilist);
 	~Tree();
 	auto begin() const->iterator;

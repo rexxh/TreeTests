@@ -1,38 +1,26 @@
 #include "tree.h" 
 
 template <class T>
+size_t Tree<T>::size() {
+	if (root) {
+		root->sizeRoot();
+	}
+	else return 0;
+}
+template <class T>
+size_t Tree<T>::Root::sizeRoot() {
+	return size_;
+}
+
+
+template <class T>
 Tree<T>::Root::Root(T x) : D(x), l(nullptr), r(nullptr),size_(1) {}
 template <class T>
-Tree<T>::Tree(const std::initializer_list<T> & ilist) : Tree() {
+Tree<T>::Tree(const std::initializer_list<T> & ilist) {
 
 	for (T element : ilist) {
 		Insert(element);
 	}
-}; 
-template <class T>
-Tree<T>::Tree() :root(nullptr), def(0) {};
-
-template <class T>
-size_t Tree<T>::size() {
-	if (def) {
-		cout << root->size2();
-		return root->size2();
-	}
-	else return 0;
-};
-
-template <class T>
-bool Tree<T>::isEmpty() {
-	if (root->size2() ==0) {
-		return true;
-	}else return false;
-};
-
-
-template <class T>
-size_t Tree<T>::Root::size2() {
-
-	return size_;
 };
 
 template <class T>
@@ -64,34 +52,32 @@ T Tree<T>::Root::find_min(Root* tree) {
 
 template <class T>
 void Tree<T>::Root::del(T x) {
-	if ((x == D) && (!l) && (!r)) { Root* root = nullptr; size_=0; throw Deleted();return; }
 	if ((x == D) && (!l)) {
 		D = r->D;
-		if (r->l) l = r->l; else { delete l; l = nullptr; }
-		if (r->r) r = r->r; else { delete r; r = nullptr; }
-		size_--;
+		if (r->l) l = r->l; else { delete[] l; l = nullptr; --size_; }
+		if (r->r) r = r->r; else { delete[] r; r = nullptr; --size_; }
 		return;
 	}
 	if ((x == D) && (!r)) {
 		D = l->D;
-		if (l->r) r = l->r; else { delete r; r = nullptr; }
-		if (l->l) l = l->l; else { delete l; l = nullptr; }
-		size_--;
+		if (l->r) r = l->r; else { delete[] r; r = nullptr; --size_; }
+		if (l->l) l = l->l; else { delete[] l; l = nullptr; --size_; }
 		return;
 	}
 	if (x < D) {
-		if ((l->D == x) && (!(l->r)) && (!(l->l))) { delete l; l = nullptr; --size_; return; }
-		if ((l->D == x) && (l->l) && (l->r)) { l->D = find_min(l->r); if (l->r->D != find_min(l->r)) l->r->del(find_min(l->r)); else { delete l->r; l->r = nullptr; size_--;} return; }
+		if ((l->D == x) && (!(l->r)) && (!(l->l))) { delete[] l; l = nullptr; return; --size_; }
+		if ((l->D == x) && (l->l) && (l->r)) { l->D = find_min(l->r); if (l->r->D != find_min(l->r)) l->r->del(find_min(l->r)); else { delete[] l->r; l->r = nullptr; --size_; } return; }
 		else; l->del(x);
+
 		return;
 	}
 	if (x > D) {
-		if ((r->D == x) && (!(r->r)) && (!(r->l))) { delete r; r = nullptr; size_--; return; }
-		if ((r->D == x) && (r->l) && (r->r)) { r->D = find_min(r->r); if (r->r->D != find_min(r->r)) r->r->del(find_min(r->r)); else { delete r->r; r->r = nullptr; size_--;} return; }
+		if ((r->D == x) && (!(r->r)) && (!(r->l))) { delete[] r; r = nullptr; return; --size_; }
+		if ((r->D == x) && (r->l) && (r->r)) { r->D = find_min(r->r); if (r->r->D != find_min(r->r)) r->r->del(find_min(r->r)); else { delete[] r->r; r->r = nullptr; --size_; } return; }
 		else r->del(x);
 		return;
 	}
-	if ((x == D) && (l) && (r)) { D = find_min(r); if (r->D != find_min(r)) r->del(find_min(r)); else { delete r; r = nullptr; size_--;} return; }
+	if ((x == D) && (l) && (r)) { D = find_min(r); if (r->D != find_min(r)) r->del(find_min(r)); else { delete[]r; r = nullptr; --size_; } return; }
 	
 }
 
@@ -123,7 +109,10 @@ bool Tree<T>::Root::print_console() {
 		if (r != nullptr) r->print_console();
 		return true;
 	}
-	else return false;
+	else { 
+
+		return false;
+	}
 }
 template <class T>
 bool Tree<T>::Root::print_file(ofstream &fout) {
@@ -140,7 +129,7 @@ bool Tree<T>::Root::print_file(ofstream &fout) {
 template <class T>
 bool Tree<T>::Insert(T x) {
 	if (root != nullptr) if (Search(x)) throw Exist();
-	if (root == nullptr) { root = new Root(x); def++; return true; }
+	if (root == nullptr) { root = new Root(x); return true; }
 	else { root->Insert(x); return true; }
 	return false;
 }
@@ -151,14 +140,16 @@ bool Tree<T>::Search(T x) {
 }
 template <class T>
 bool Tree<T>::del(T x) {
-	if (root == nullptr) {throw Empty();}
-	if (this->Search(x)) {
-		throw Exist();
+	if (root == nullptr) throw Empty();
+	if (!this->Search(x)) throw Exist();
+	if (this->size()==1) {
+		delete root;
+		root = nullptr;
 	}
-	try { root->del(x);}
-	catch (Deleted &) { throw Deleted(); }
+	else {
+		root->del(x);
+	}
 	return true;
-		
 }
 
 template <class T>
@@ -167,11 +158,11 @@ ostream & operator <<(ostream & out, Tree<T> & tree) {
 	else throw Empty();
 }
 template <class T>
-ifstream& operator >> (ifstream & fin, Tree<T> & tree) {
+ifstream& operator >>(ifstream & fin, Tree<T> & tree) {
 	if (!fin.is_open()) throw File_Not_Open();
 	T x;
 	while (!fin.eof()) {
-		if (fin >> x) tree.Insert(x);
+		if (fin>>x) tree.Insert(x);
 		else break;
 	}
 	return fin;
@@ -203,3 +194,84 @@ istream & operator >> (istream & in, Tree<T> & tree) {
 	return in;
 
 }
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+template <class T>
+bool Tree<T>::operator == (const Tree<T> &tree) 
+{
+	
+
+	iterator i = begin();
+	iterator j = tree.begin();
+	for (; i != end() || j != tree.end(); ++i, ++j) {
+		if (*i != *j) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+template <class T>
+auto Tree<T>::fillListOfNodes(list<const Root*> & listOfNodes, const Root* root) ->void
+{
+	if (root) {
+		if (root->l != nullptr) {
+			fillListOfNodes(listOfNodes, root->l);
+		}
+
+		listOfNodes.push_back(root);
+
+		if (root->r != nullptr) {
+			fillListOfNodes(listOfNodes, root->r);
+		}
+	}
+}
+
+template <class T>
+auto Tree<T>::begin() const->iterator
+{
+	return iterator(root);
+}
+
+template <class T>
+auto Tree<T>::end() const->iterator
+{
+	return iterator();
+}
+
+template <class T>
+Tree<T>::NodeIterator::NodeIterator(const Root* root) : NodeIterator()
+{
+	fillListOfNodes(history_, root);
+}
+
+template <class T>
+auto Tree<T>::NodeIterator::operator == (const NodeIterator & _iterator) -> bool
+{
+	cout << "asd";
+	return this->history_ == _iterator.history_;
+}
+
+template <class T>
+auto Tree<T>::NodeIterator::operator != (const NodeIterator & _iterator) -> bool
+{
+	return !this->operator==(_iterator);
+}
+
+template <typename T>
+auto Tree<T>::NodeIterator::operator ++() -> NodeIterator
+{
+	history_.pop_front();
+	return *this;
+}
+
+template <typename T>
+auto Tree<T>::NodeIterator::operator *() const -> const T &
+{
+	return history_.front()->D;
+}
+

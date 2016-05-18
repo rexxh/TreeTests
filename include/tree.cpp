@@ -17,20 +17,17 @@ Tree<T>::~Tree() {
 } 
 template <class T>
 void Tree<T>::Root::destroy(Root* root) {
-	if (root !=nullptr){ ;
+
 	if (root->l)
-	delete root;
 	{
 		destroy(root->l);
-		root->l = 0;
 	}
 	if (root->r != 0)
 	{
 		destroy(root->r);
-		root->r = 0;
 	}
 	delete root;
-	}
+	
 }
 
 

@@ -289,11 +289,11 @@ SCENARIO("BST search non inserted element", "[search]") {
 	REQUIRE( !tree.Search(5) );
 }
 
-/*SCENARIO("BST delete non inserted element", "[delete]") {
-	Tree<int> tree = {8};
+SCENARIO("BST delete non inserted element", "[delete]") {
+	Tree<int> tree {8};
 	REQUIRE( !tree.remove(4) );
-	REQUIRE( !tree.isEmpty() );
-}*/
+
+}
 
 // 				  +----+
 // 				  |-08-|									           *
@@ -305,7 +305,6 @@ SCENARIO("BST search non inserted element", "[search]") {
 SCENARIO("BST delete root without children", "[delete]") {
 	Tree<int> tree  {8};
 	REQUIRE( tree.del(8) );
-//	REQUIRE( tree.isEmpty() );
 }
 
 //                +----+                                              +----+

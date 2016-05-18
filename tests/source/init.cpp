@@ -306,7 +306,7 @@ SCENARIO("BST delete non inserted element", "[delete]") {
 // 						 				    08
 // 						 				   ---->
 SCENARIO("BST delete root without children", "[delete]") {
-	Tree<int> tree {8};
+	Tree<int> tree {8};int O=0;
 try{ tree.del(8);}
 catch(Deleted &){O++;}
 REQUIRE(O==1);

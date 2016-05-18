@@ -151,16 +151,15 @@ bool Tree<T>::Search(T x) {
 }
 template <class T>
 bool Tree<T>::del(T x) {
-	if (root == nullptr) {throw Empty();return false;}
+	if (root == nullptr) {throw Empty();}
 	if (this->Search(x)) {
 		throw Exist();
 		return false;
-		
-	}else{
+	}
 	try { root->del(x);}
 	catch (Deleted &) { throw Deleted(); }
 	return true;
-		}
+		
 }
 
 template <class T>

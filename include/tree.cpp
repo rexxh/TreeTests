@@ -137,7 +137,7 @@ ifstream& operator >>(ifstream & fin, Tree<T> & tree) {
 if (!fin.is_open()) throw File_Not_Open();
 T x;
 while (!fin.eof()){
-if (fin»x) tree.Insert(x);
+if (fin>>x) tree.Insert(x);
 else break;
 }
 return fin;
@@ -149,10 +149,10 @@ if (tree.root->print_file(fout)) return fout;else throw Empty();}
 template <class T>
 istream & operator >> (istream & in, Tree<T> & tree) {
 size_t size;
-if (in » size) {
+if (in >> size) {
 for (int i= 0; i < size; ++i) {
 T temp;
-if (in » temp) {
+if (in >> temp) {
 tree.Insert(temp);
 }
 else {

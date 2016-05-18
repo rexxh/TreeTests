@@ -291,7 +291,7 @@ SCENARIO("BST search non inserted element", "[search]") {
 
 SCENARIO("BST delete non inserted element", "[delete]") {
 	Tree<int> tree {8};
-	REQUIRE( !tree.remove(4) );
+	REQUIRE( !tree.del(4) );
 
 }
 

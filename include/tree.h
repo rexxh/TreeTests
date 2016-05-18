@@ -6,16 +6,16 @@ using namespace std;
 template <class T> 
 class Tree; 
 template <class T> 
-ostream & operator«(ostream & out, Tree<T> &tree); 
+ostream & operator<<(ostream & out, Tree<T> &tree); 
 
 template <class T> 
-ofstream & operator«(ofstream & fout, Tree<T> &tree); 
+ofstream & operator<<(ofstream & fout, Tree<T> &tree); 
 
 template <class T> 
-ifstream & operator » (ifstream & fin, Tree<T> &tree); 
+ifstream & operator>> (ifstream & fin, Tree<T> &tree); 
 
 template <class T> 
-istream & operator » (istream & in, Tree<T> &tree); 
+istream & operator>> (istream & in, Tree<T> &tree); 
 
 
 //Класс исключений 
@@ -66,10 +66,10 @@ Tree(const std::initializer_list<T> & ilist);
 bool Insert(T x);// Добавление элемента 
 bool Search(T x);// Поиск элемента 
 bool del(T x); //удаление узла дерева 
-friend ostream & operator« <>(ostream &out, Tree<T> &tree); 
-friend ofstream & operator« <>(ofstream &fout, Tree<T> &tree); 
-friend ifstream & operator» <>(ifstream &fin, Tree<T> &tree); 
-friend istream & operator » <>(istream & in, Tree<T> &tree); 
+friend ostream & operator<< <>(ostream &out, Tree<T> &tree); 
+friend ofstream & operator<< <>(ofstream &fout, Tree<T> &tree); 
+friend ifstream & operator >> <>(ifstream &fin, Tree<T> &tree); 
+friend istream & operator >> <>(istream & in, Tree<T> &tree); 
 class Root; 
 Root* root; //корень дерева 
 

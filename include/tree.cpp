@@ -77,10 +77,12 @@ void Tree<T>::Root::Insert(T x) {
 	if (x < D) {
 		if (l != nullptr) l->Insert(x);
 		if (l == nullptr) l = new Root(x);
+		++size;
 	}
 	if (x>D) {
 		if (r != nullptr) r->Insert(x);
 		if (r == nullptr) r = new Root(x);
+		++size;
 	}
 }
 template <class T>
@@ -151,3 +153,26 @@ ifstream& operator >>(ifstream & fin, Tree<T> & tree) {
 template <class T>
 ofstream & operator <<(ofstream & fout, Tree<T> & tree) {
 	if (tree.root->print_file(fout)) return fout;else throw Empty();}
+	
+template <class T>
+istream & operator >> (istream & in, Tree<T> & tree) {
+	size_t size;
+	if (in >> size) {
+	for (int i= 0; i < size; ++i) {
+	T temp;
+		if (in >> temp) {
+			tree.Insert(temp);
+			}
+			else {
+				throw Error_stream();
+			}
+		}
+	}
+	else {
+		throw Error_stream();
+	}
+
+	return in;
+
+
+}

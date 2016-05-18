@@ -13,7 +13,6 @@ template <class T>
 Tree<T>::~Tree() {
 	if(root){
 	root->destroy(root);
-	delete root;
 	}
 } 
 template <class T>

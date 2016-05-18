@@ -1,6 +1,5 @@
 #include "tree.h" 
 
-
 template <class T>
 Tree<T>::Root::Root(T x) : D(x), l(nullptr), r(nullptr),size_(1) {}
 template <class T>

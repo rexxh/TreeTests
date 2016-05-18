@@ -27,7 +27,7 @@ void Tree<T>::Root::destroy(Root* root) {
 		destroy(root->r);
 	}
 	delete root;
-	
+	root=nullptr;
 }
 
 

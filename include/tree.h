@@ -58,8 +58,7 @@ Error_stream::Error_stream() : Exceptions("ERROR: Stream error") {}
 template <class T>
 class Tree {
 public:
-	size_t size;
-	Tree() :root(nullptr),size(0) {};
+	Tree() :root(nullptr) {};
 	Tree(const std::initializer_list<T> & ilist);
 
 

@@ -143,8 +143,10 @@ bool Tree<T>::del(T x) {
 	if (root == nullptr) throw Empty();
 	if (!this->Search(x)) throw Exist();
 	if (this->size()==1) {
-		delete root;
 		root = nullptr;
+		delete root;
+		Root* root = nullptr;
+		
 	}
 	else {
 		root->del(x);

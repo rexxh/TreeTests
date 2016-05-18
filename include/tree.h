@@ -2,7 +2,7 @@
 #include <fstream>
 #include <list>
 using namespace std;
-
+ 
 template <class T>
 class Tree;
 template <class T>

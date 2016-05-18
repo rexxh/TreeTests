@@ -288,8 +288,8 @@ SCENARIO("BST search inserted element", "[search]") {
 }
 
 SCENARIO("BST search non inserted element", "[search]") {
-Tree<int> tree = {8, 4, 3};
-	REQUIRE( !tree.find(5) );
+Tree<int> tree {8, 4, 3};
+	REQUIRE( !tree.Search(5) );
 }
 
 SCENARIO("BST delete non inserted element", "[delete]") {
@@ -306,7 +306,7 @@ SCENARIO("BST delete non inserted element", "[delete]") {
 // 						 				    08
 // 						 				   ---->
 SCENARIO("BST delete root without children", "[delete]") {
-	Tree<int> tree  {8};
+	Tree<int> tree {8};
 	REQUIRE( tree.del(8) );
 	REQUIRE( tree.isEmpty() );
 }

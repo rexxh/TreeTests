@@ -77,12 +77,10 @@ void Tree<T>::Root::Insert(T x) {
 	if (x < D) {
 		if (l != nullptr) l->Insert(x);
 		if (l == nullptr) l = new Root(x);
-		++size;
 	}
 	if (x>D) {
 		if (r != nullptr) r->Insert(x);
 		if (r == nullptr) r = new Root(x);
-		++size;
 	}
 }
 template <class T>

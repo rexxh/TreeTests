@@ -8,7 +8,7 @@ Tree<T>::Tree(const std::initializer_list<T> & ilist) : Tree() {
 	for (T element : ilist) {
 		Insert(element);
 	}
-};
+}; 
 template <class T>
 Tree<T>::Tree() :root(nullptr), def(0) {};
 

@@ -61,7 +61,7 @@ class Tree {
 public:
 	class RootIterator;
 	using iterator = RootIterator;
-	size_t size_;
+	static int size_;
 	Tree() :root(nullptr), size_(0) {};
 	Tree(const initializer_list<T> & ilist);
 	~Tree();

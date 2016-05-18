@@ -150,4 +150,4 @@ ifstream& operator >>(ifstream & fin, Tree<T> & tree) {
 }
 template <class T>
 ofstream & operator <<(ofstream & fout, Tree<T> & tree) {
-	if (tree.root->print_file(fout)) return fout;}
+	if (tree.root->print_file(fout)) return fout;else throw Empty();}

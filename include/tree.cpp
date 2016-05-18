@@ -2,7 +2,7 @@
 template <class T>
 Tree<T>::Root::Root(T x) : D(x), l(nullptr), r(nullptr) {}
 template <class T>
-Tree<T>::Tree(const std::initializer_list<T> & ilist) {
+Tree<T>::Tree(const std::initializer_list<T> & ilist):Tree (){
 
 for (T element : ilist) {
 Insert(element);

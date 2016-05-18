@@ -1,4 +1,4 @@
-
+#include "tree.h"
 template <class T>
 auto Tree<T>::fillListOfNodes(list<const Root*> & listOfNodes, const Root* root) -> void
 {

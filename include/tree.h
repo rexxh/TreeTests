@@ -1,15 +1,15 @@
 #include <iostream>
 #include <fstream>
-#include <set>  
-using namespace std; 
-                  
+#include <list>
+using namespace std;
+
 template <class T>
 class Tree;
 template <class T>
 ostream & operator<<(ostream & out, Tree<T> &tree);
 
 template <class T>
-ofstream & operator<<(ofstream & fout, Tree<T> &tree);
+ofstream & operator << (ofstream & out, Tree<T> &tree);
 
 template <class T>
 ifstream & operator >> (ifstream & fin, Tree<T> &tree);
@@ -57,25 +57,38 @@ Error_stream::Error_stream() : Exceptions("ERROR: Stream error") {}
 
 template <class T>
 class Tree {
+	class RootIterator;
+	using iterator = RootIterator;
 public:
-	Tree() :root(nullptr) {};
-	Tree(const std::initializer_list<T> & ilist);
-
-
+	int size_;
+	Tree() :root(nullptr), size(0) {};
+	Tree(const initializer_list<T> & ilist);
 	~Tree();
+	auto begin() const->iterator;
+	auto end() const->iterator;
 	bool Insert(T x);// Добавление элемента 
 	bool Search(T x);// Поиск элемента 
 	bool del(T x); //удаление узла дерева
 	friend ostream & operator<< <>(ostream &out, Tree<T> &tree);
-	friend ofstream & operator<< <>(ofstream &fout, Tree<T> &tree);		
-	friend ifstream & operator>> <>(ifstream &fin, Tree<T> &tree);
+	friend auto operator << <>(ofstream & out, const Tree<T> &tree)->ofstream &;
+	friend ifstream & operator >> <>(ifstream &fin, Tree<T> &tree);
 	friend istream & operator >> <>(istream & in, Tree<T> &tree);
 	class Root;
 	Root* root; //корень дерева
-
-private:
-
-
+	static auto fillListOfNodes(list<const Root*> & listOfNodes, const Root* root) -> void;
+	auto operator == (const Tree & tree) -> bool;
+	auto serialize(ofstream & out, Root* root) const -> void;
+	class RootIterator {
+	public:
+		RootIterator() = default;
+		RootIterator(const Root* root);
+		auto operator == (const RootIterator & _iterator) -> bool;
+		auto operator != (const RootIterator & _iterator) -> bool;
+		auto operator ++()->RootIterator;
+		auto operator *() const -> const T &;
+	private:
+		list<const Root*> history_;
+	};
 };
 
 template <class T>
@@ -95,4 +108,3 @@ private:
 	Root *l;
 	Root *r;
 };
-

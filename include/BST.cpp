@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include "Classes.h" 
-
+ 
 template<class T>
 BST<T>::BST(int key, T data)
 {

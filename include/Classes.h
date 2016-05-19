@@ -43,7 +43,7 @@ public:
 
         BST(int key, T data);
 
-	void Insert(Node<T> *&tmp, int key, T data);
+	bool Insert(Node<T> *&tmp, int key, T data);
 
 	Node<T>* Search(int K);
 

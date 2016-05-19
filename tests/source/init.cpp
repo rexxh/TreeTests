@@ -6,7 +6,7 @@ using namespace std;
                   
 
 SCENARIO("Search init", "[init]") {
-BST<int> tree;
+BST<int> tree(2, 1);
 Node<int>* tmp;
 Node<int>* Root = tree.get_root();
 tree.Insert(Root, 6, 100);

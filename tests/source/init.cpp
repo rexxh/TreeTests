@@ -17,9 +17,6 @@ REQUIRE(tmp == tree.Search(6));
 REQUIRE(tmp ==tree.Search(0));
 REQUIRE(tmp ==tree.Search(-5));
 REQUIRE(tmp ==tree.Search(12));
-REQUIRE
-(tree.Search(11);
-catch(Element_not_found errorrr););
-REQUIRE(tree.Search(1);
-catch(Element_not_found errorrr););
+REQUIRE(tree.Search(11);catch(Element_not_found errorrr););
+REQUIRE(tree.Search(1);catch(Element_not_found errorrr););
 }

@@ -144,7 +144,7 @@ void BST<T>::ReadFromFile(string text) {
 	try{
 		ifstream file(text);
 		if (!fout.is_open()) {
-			throw File_Not_Open()
+			throw File_Not_Open();
 		}
 		int key;
 		T data;

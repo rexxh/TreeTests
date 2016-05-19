@@ -65,14 +65,14 @@ void Tree<T>::Root::del(T x) {
 		return;
 	}
 	if (x < D) {
-		if ((l->D == x) && (!(l->r)) && (!(l->l))) { delete[] l; l = nullptr; return; --size_; }
+		if ((l->D == x) && (!(l->r)) && (!(l->l))) { delete[] l; l = nullptr;--size_; return;  }
 		if ((l->D == x) && (l->l) && (l->r)) { l->D = find_min(l->r); if (l->r->D != find_min(l->r)) l->r->del(find_min(l->r)); else { delete[] l->r; l->r = nullptr; --size_; } return; }
 		else; l->del(x);
 
 		return;
 	}
 	if (x > D) {
-		if ((r->D == x) && (!(r->r)) && (!(r->l))) { delete[] r; r = nullptr; return; --size_; }
+		if ((r->D == x) && (!(r->r)) && (!(r->l))) { delete[] r; r = nullptr;--size_; return;  }
 		if ((r->D == x) && (r->l) && (r->r)) { r->D = find_min(r->r); if (r->r->D != find_min(r->r)) r->r->del(find_min(r->r)); else { delete[] r->r; r->r = nullptr; --size_; } return; }
 		else r->del(x);
 		return;

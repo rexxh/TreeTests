@@ -56,14 +56,14 @@ Node<T>* BST<T>:: Search(int K) //Поиск элемента
 }
 
 template<class T>
-void BST<T>::Insert(Node<T> *&tmp, int key, T data) {
+bool BST<T>::Insert(Node<T> *&tmp, int key, T data) {
 	if (tmp == NULL) {
 		tmp = new Node<T>;
 		tmp->right = nullptr;
 		tmp->left = nullptr;
 		tmp->key = key;
 		tmp->data = data;
-		return;
+		return true;
 	}
 	if (tmp->key > key) {
 		Insert(tmp->left, key, data);

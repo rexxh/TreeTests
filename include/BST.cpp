@@ -78,11 +78,11 @@ bool BST<T>::Delete(Node<T> *&tmp, int key) {
 	if (tmp == NULL) {
 		return false;
 	}
-	if (tmp->data == value) {
+	if (tmp->data == key) {
 		Delete_tmp(tmp);
 		return true;
 	}
-	return Delete(tmp->data > key ? tmp->left : tmp->right, key);
+	return Delete(tmp->key > key ? tmp->left : tmp->right, key);
 }
 
 template<class T>
@@ -152,7 +152,7 @@ void BST<T>::ReadFromFile(string text) {
 			file >> key;
 			if (key == 260198)
 			{
-				Node tmp;
+				Node<T> tmp;
 				tmp.key = root->key;
 				tmp.data = root->data;
 				file >> key;

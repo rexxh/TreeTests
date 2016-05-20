@@ -31,7 +31,7 @@ SCENARIO("Delete Node", "[Delete]") {
   BST<int> tree(2,10);
   Node<int>*Root= tree.get_root();
   tree.Insert(Root, 4, 60);
-  tree.Delete(4);
+  tree.Delete(Root,4);
   int x =0;
   try{tree.Search(4);}
   catch(Element_not_found i ) { x=1;}

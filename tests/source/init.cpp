@@ -22,3 +22,21 @@ SCENARIO("Search element", "[Search]") {
   REQUIRE(tree.Search(1)!=0);
 }
 
+SCENARIO("Get root", "[Getroot]") {
+  BST<int> tree(2,8);
+  REQUIRE(tree.get_root()!=0)}
+}
+
+SCENARIO("Delete Node", "[Delete]") {
+  BST<int> tree(2,10);
+  Node<int>*Root= tree.get_root();
+  tree.Insert(Root, 4, 60);
+  tree.Delete(4);
+  int x =0;
+  try{tree.Search(4);}
+  catch(Element_Not_Found i ) { x=1;}
+  REQUIRE(x==1);
+}
+
+
+}

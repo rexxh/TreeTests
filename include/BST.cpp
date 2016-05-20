@@ -78,7 +78,7 @@ bool BST<T>::Delete(Node<T> *&tmp, int key) {
 	if (tmp == NULL) {
 		return false;
 	}
-	if (tmp->data == key) {
+	if (tmp->key == key) {
 		Delete_tmp(tmp);
 		return true;
 	}

@@ -28,11 +28,11 @@ SCENARIO("Get root", "[Getroot]") {
 }
 
 
-SCENARIO("Readfromfile", "[read]") {
+/*SCENARIO("Readfromfile", "[read]") {
   ifstream fin;
   BST<int>tree(2,800);
   fin.open("read.txt");
   fin>>tree;
   REQUIRE(tree.Search(7)!=0);
-}
+}*/
 
